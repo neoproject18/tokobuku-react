@@ -1,0 +1,23 @@
+.blog-wrap,
+.box-stock {
+    width: 300px;
+    display: inline-block;
+    height: auto;
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 10px;
+}
+
+.blog-wrap img,
+.box-stock img {
+    width: 300px;
+    height: 200px;
+}
+
+.btn {
+    background-color: black;
+    color: white;
+    width: 100px;
+    padding: 10px;
+    border: none;
+}
