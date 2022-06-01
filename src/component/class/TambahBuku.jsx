@@ -1,18 +1,17 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
+import qs from "querystring";
 import {
   Container,
   Col,
   Row,
   FormGroup,
-  Alert,
   Label,
   Input,
-  Select,
   Button,
   Form,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { swal_alert } from "../../js/sweetshow";
 
 export default class TambahBuku extends PureComponent {
   constructor(props) {
@@ -24,7 +23,6 @@ export default class TambahBuku extends PureComponent {
       penerbit: "",
       id_kategori: "",
       jumlah: "",
-      response: "",
     };
   }
 
@@ -32,63 +30,35 @@ export default class TambahBuku extends PureComponent {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  saveBuku = () => {
-    // axios
-    //   .post(
-    //     `${window.api}/buku`,
-    //     {
-    //       headers: {
-    //         Authorization: window.token,
-    //       },
-    //       body: {
-    //         "rest-key": window.apikey,
-    //         judul: this.state.judul,
-    //         penulis: this.state.penulis,
-    //         tahun: this.state.tahun,
-    //         penerbit: this.state.penerbit,
-    //         //   id_kategori: this.state.id_kategori,
-    //         jumlah: this.state.jumlah,
-    //       },
-    //     },
-    //     {
-    //       "rest-key": window.apikey,
-    //       judul: this.state.judul,
-    //       penulis: this.state.penulis,
-    //       tahun: this.state.tahun,
-    //       penerbit: this.state.penerbit,
-    //       //   id_kategori: this.state.id_kategori,
-    //       jumlah: this.state.jumlah,
-    //     }
-    //   )
-    //   .then((json) => {
-    //     console.log(json.data.message);
-    //     this.setState({
-    //       response: json.data.message,
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response);
-    //   });
-    axios({
-      url: `${window.api}/buku`,
-      method: "post",
-      headers: {
-        Authorization: window.token,
-      },
-      data: {
-        "rest-key": window.apikey,
-        judul: this.state.judul,
-        penulis: this.state.penulis,
-        tahun: this.state.tahun,
-        penerbit: this.state.penerbit,
-        id_kategori: this.state.id_kategori,
-        jumlah: this.state.jumlah,
-      },
-    }).then((json) => {
-      this.setState({
-        response: json.data.message,
+  saveBuku = async (e) => {
+    e.preventDefault();
+    await axios
+      .post(
+        `${window.api}/buku`,
+        qs.stringify({
+          "rest-key": window.apikey,
+          judul: this.state.judul,
+          penulis: this.state.penulis,
+          tahun: this.state.tahun,
+          penerbit: this.state.penerbit,
+          id_kategori: this.state.id_kategori,
+          jumlah: this.state.jumlah,
+        }),
+        {
+          headers: {
+            Authorization: window.token,
+          },
+        }
+      )
+      .then((json) => {
+        console.log(json.status);
+        swal_alert(json.status, json.data.message, true);
+      })
+      .catch((error) => {
+        let json = error.response;
+        console.log(error.response.data);
+        swal_alert(json.status, json.data.message, null);
       });
-    });
   };
 
   render() {
@@ -96,7 +66,7 @@ export default class TambahBuku extends PureComponent {
       <Container>
         <h3>Tambah Data Buku</h3>
         <hr />
-        <Form>
+        <Form onSubmit={this.saveBuku}>
           <Col>
             <FormGroup>
               <Row>
@@ -154,7 +124,11 @@ export default class TambahBuku extends PureComponent {
               <Row>
                 <Label className="col-2 col-form-label">Kategori</Label>
                 <Col className="col-4">
-                  <select className="form-control" name="id_kategori">
+                  <select
+                    className="form-control"
+                    name="id_kategori"
+                    onChange={this.handleChange}
+                  >
                     <option value="">== Pilih ==</option>
                     <option value={1}>Buku Pelajaran</option>
                     <option value={2}>Novel</option>
@@ -178,7 +152,7 @@ export default class TambahBuku extends PureComponent {
               <Row>
                 <Label className="col-2"></Label>
                 <Col className="col-4">
-                  <Button type="submit" color="primary" onClick={this.saveBuku}>
+                  <Button type="submit" color="primary">
                     Submit
                   </Button>
                 </Col>

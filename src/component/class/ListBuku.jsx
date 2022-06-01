@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
-import { Table, Button, Container, NavLink, Alert } from "reactstrap";
+import { Table, Button, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export default class ListBuku extends PureComponent {
