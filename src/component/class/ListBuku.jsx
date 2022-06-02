@@ -69,7 +69,22 @@ export default class ListBuku extends PureComponent {
                 <td>{item.judul_buku}</td>
                 <td>{item.penulis}</td>
                 <td>{item.penerbit}</td>
-                <td>Edit | Hapus</td>
+                <td>
+                  <Link
+                    to={"/buku/edit"}
+                    state={{
+                      id_buku: item.id_buku,
+                      judul: item.judul_buku,
+                      penulis: item.penulis,
+                      penerbit: item.penerbit,
+                      tahun: item.tahun_terbit,
+                      id_kategori: item.id_kategori,
+                      jumlah: item.jumlah,
+                    }}
+                  >
+                    <Button color="warning"> Edit</Button>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>

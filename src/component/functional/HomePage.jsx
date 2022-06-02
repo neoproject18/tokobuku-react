@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as e from "reactstrap";
+import { WebService } from "../../js/webservice";
 
 export default function HomePage() {
+  const datacontext = useContext(WebService);
   return (
     <div>
+      <h1>{datacontext}</h1>
+      <hr />
       <e.Card>
         <e.CardBody>
           <e.CardTitle tag="h5">Ini adalah halaman HOMEPAGE</e.CardTitle>

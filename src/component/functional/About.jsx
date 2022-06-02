@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Card,
@@ -10,11 +10,13 @@ import {
   Container,
   Row,
 } from "reactstrap";
+import { WebService } from "../../js/webservice";
 import CardComp from "./CardComp";
 
 export default function About() {
   return (
     <div>
+      <h1>{useContext(WebService)}</h1>
       <Card>
         <CardBody>
           <CardTitle tag="h5">Ini adalah halaman ABOUT</CardTitle>

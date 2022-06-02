@@ -11,14 +11,20 @@ export default class BootstrapComp extends Component {
           <e.NavbarToggler onClick={function noRefCheck() {}} />
           <e.Collapse navbar>
             <e.Nav className="me-auto" navbar>
-              <Link to="/" class="nav-link" aria-current="page">
+              <Link to="/" className="nav-link" aria-current="page">
                 HOME
               </Link>
-              <Link to="/about" class="nav-link" aria-current="page">
+              <Link to="/about" className="nav-link" aria-current="page">
                 ABOUT
               </Link>
-              <Link to="/buku/list" class="nav-link" aria-current="page">
+              <Link to="/buku/list" className="nav-link" aria-current="page">
                 DATA BUKU
+              </Link>
+              <Link to="/kelas" className="nav-link" aria-current="page">
+                KELAS
+              </Link>
+              <Link to="/hooks" className="nav-link" aria-current="page">
+                HOOK
               </Link>
               {/* <e.UncontrolledDropdown inNavbar nav>
                 <e.DropdownToggle caret nav>

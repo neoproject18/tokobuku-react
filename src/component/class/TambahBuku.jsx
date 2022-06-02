@@ -12,6 +12,7 @@ import {
   Form,
 } from "reactstrap";
 import { swal_alert } from "../../js/sweetshow";
+import { Link } from "react-router-dom";
 
 export default class TambahBuku extends PureComponent {
   constructor(props) {
@@ -153,8 +154,11 @@ export default class TambahBuku extends PureComponent {
                 <Label className="col-2"></Label>
                 <Col className="col-4">
                   <Button type="submit" color="primary">
-                    Submit
+                    Simpan
                   </Button>
+                  <Link to={"/buku/list"}>
+                    <Button color="danger">Kembali</Button>
+                  </Link>
                 </Col>
               </Row>
             </FormGroup>
