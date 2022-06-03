@@ -7,13 +7,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./component/functional/HomePage";
 import About from "./component/functional/About";
 import Detail from "./component/functional/Detail";
-import ListBuku from "./component/class/ListBuku";
-import TambahBuku from "./component/class/TambahBuku";
-import EditBuku from "./component/class/EditBuku";
 import { createBrowserHistory } from "history";
 import KelasComp from "./component/hooks/class/KelasComp";
 import HooksComp from "./component/hooks/functional/HooksComp";
 import { WebService } from "./js/webservice";
+import ListBuku from "./component/buku/ListBuku";
+import TambahBuku from "./component/buku/TambahBuku";
+import EditBuku from "./component/buku/EditBuku";
 
 window.api = "http://localhost/restperpus";
 window.apikey = "123456789";

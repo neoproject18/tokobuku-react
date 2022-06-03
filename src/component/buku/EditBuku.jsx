@@ -17,35 +17,28 @@ import { swal_alert } from "../../js/sweetshow";
 export default function EditBuku() {
   const location = useLocation();
   console.log(location.state);
-  const [buku, setBuku] = useState({
-    id_buku: location.state.id_buku,
-    judul: location.state.judul,
-    penulis: location.state.penulis,
-    tahun: location.state.tahun,
-    penerbit: location.state.penerbit,
-    id_kategori: location.state.id_kategori,
-    jumlah: location.state.jumlah,
-  });
-
-  const handleChange = (e) => {
-    setBuku({ [e.target.name]: e.target.value });
-    console.log(buku);
-  };
+  const [judul, setJudul] = useState(location.state.judul);
+  const [penulis, setPenulis] = useState(location.state.penulis);
+  const [tahun, setTahun] = useState(location.state.tahun);
+  const [penerbit, setPenerbit] = useState(location.state.penerbit);
+  const [id_kategori, setIdKategori] = useState(location.state.id_kategori);
+  const [jumlah, setJumlah] = useState(location.state.jumlah);
 
   const updateBuku = (e) => {
     e.preventDefault();
-    console.log(buku);
+    // console.log(buku);
     axios
       .put(
         `${window.api}/buku`,
         qs.stringify({
           "rest-key": window.apikey,
-          judul: buku.judul,
-          penulis: buku.penulis,
-          tahun: buku.tahun,
-          penerbit: buku.penerbit,
-          id_kategori: buku.id_kategori,
-          jumlah: buku.jumlah,
+          id_buku: location.state.id_buku,
+          judul: judul,
+          penulis: penulis,
+          tahun: tahun,
+          penerbit: penerbit,
+          id_kategori: id_kategori,
+          jumlah: jumlah,
         }),
         {
           headers: {
@@ -77,8 +70,8 @@ export default function EditBuku() {
                 <Input
                   type="text"
                   name="judul"
-                  value={buku.judul}
-                  onChange={handleChange}
+                  value={judul}
+                  onChange={(e) => setJudul(e.target.value)}
                   placeholder="Masukkan Judul Buku"
                 />
               </Col>
@@ -91,8 +84,8 @@ export default function EditBuku() {
                 <Input
                   type="text"
                   name="penulis"
-                  value={buku.penulis}
-                  onChange={handleChange}
+                  value={penulis}
+                  onChange={(e) => setPenulis(e.target.value)}
                   placeholder="Masukkan Penulis Buku"
                 />
               </Col>
@@ -105,8 +98,8 @@ export default function EditBuku() {
                 <Input
                   type="text"
                   name="penerbit"
-                  value={buku.penerbit}
-                  onChange={handleChange}
+                  value={penerbit}
+                  onChange={(e) => setPenerbit(e.target.value)}
                   placeholder="Masukkan Penerbit Buku"
                 />
               </Col>
@@ -115,8 +108,8 @@ export default function EditBuku() {
                 <Input
                   type="number"
                   name="tahun"
-                  value={buku.tahun}
-                  onChange={handleChange}
+                  value={tahun}
+                  onChange={(e) => setTahun(e.target.value)}
                   placeholder="Tahun Terbit"
                 />
               </Col>
@@ -129,7 +122,8 @@ export default function EditBuku() {
                 <select
                   className="form-control"
                   name="id_kategori"
-                  onChange={handleChange}
+                  value={id_kategori}
+                  onChange={(e) => setIdKategori(e.target.value)}
                 >
                   <option value="">== Pilih ==</option>
                   <option value={1}>Buku Pelajaran</option>
@@ -143,8 +137,8 @@ export default function EditBuku() {
                   type="number"
                   name="jumlah"
                   min="0"
-                  value={buku.jumlah}
-                  onChange={handleChange}
+                  value={jumlah}
+                  onChange={(e) => setJumlah(e.target.value)}
                   placeholder="Jumlah Buku"
                 />
               </Col>
