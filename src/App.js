@@ -1,8 +1,5 @@
-// import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./component/class/Navbar";
-// import Home from "./component/functional/Home";
-// import Beranda from "./component/class/Beranda";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./component/functional/HomePage";
 import About from "./component/functional/About";
@@ -14,6 +11,7 @@ import { WebService } from "./js/webservice";
 import ListBuku from "./component/buku/ListBuku";
 import TambahBuku from "./component/buku/TambahBuku";
 import EditBuku from "./component/buku/EditBuku";
+import HooksReducer from "./component/hooks/functional/HooksReducer";
 
 window.api = "http://localhost/restperpus";
 window.apikey = "123456789";
@@ -36,6 +34,7 @@ function App() {
             <Route path="/buku/edit" exact element={<EditBuku />}></Route>
             <Route path="/kelas" exact element={<KelasComp />}></Route>
             <Route path="/hooks" exact element={<HooksComp />}></Route>
+            <Route path="/reducer" exact element={<HooksReducer />}></Route>
           </Routes>
         </WebService.Provider>
       </Router>
