@@ -26,6 +26,9 @@ export default class BootstrapComp extends Component {
               <Link to="/hooks" className="nav-link" aria-current="page">
                 HOOK
               </Link>
+              <Link to="/reducer" className="nav-link" aria-current="page">
+                REDUCER
+              </Link>
               {/* <e.UncontrolledDropdown inNavbar nav>
                 <e.DropdownToggle caret nav>
                   Options
