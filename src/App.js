@@ -43,7 +43,6 @@ const reducer = (state, action) => {
       };
     case "LOGOUT":
       localStorage.clear();
-      window.token = "";
       return {
         ...state,
         isAuthenticated: false,

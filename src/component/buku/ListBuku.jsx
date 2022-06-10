@@ -9,6 +9,7 @@ import { AuthContext } from "../../App";
 export default function ListBuku() {
   const { dispatch } = useContext(AuthContext);
   const [buku, setBuku] = useState([]);
+  window.token = localStorage.getItem("token");
 
   useEffect(() => {
     console.log("Memanggil Use Effect");
