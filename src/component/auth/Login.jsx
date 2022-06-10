@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { useNavigate } from "react-router-dom";
 import { swal_alert } from "../../js/sweetshow";
 import axios from "axios";
 import qs from "querystring";
@@ -10,7 +9,6 @@ export default function Login() {
   const { dispatch } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const AuthLogin = async (e) => {
     e.preventDefault();
@@ -33,8 +31,8 @@ export default function Login() {
           // localStorage.setItem("isAuthenticated", true);
           // localStorage.setItem("token", json.data.token);
           swal_alert(json.status, json.data.message, null);
-          navigate("/home");
-          navigate.router.replace("/home");
+          // navigate("/home");
+          // navigate.router.replace("/home");
         })
         .catch((error) => {
           let json = error.response;

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import {
   Collapse,
   Nav,
@@ -8,35 +8,40 @@ import {
   NavbarText,
   NavbarToggler,
 } from "reactstrap";
+import { AuthContext } from "../App";
 import { swal_alert_action, swal_confirm } from "../js/sweetshow";
 
 export default function NavBar() {
-  const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
   const logout = () => {
-    localStorage.clear();
+    // localStorage.clear();
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
     swal_alert_action(200, "Anda berhasil keluar", () => {
-      navigate("/");
-      navigate.router.replace("/");
+      // window.location.reload();
+      // navigate.router.replace("/");
     });
   };
 
   return (
     <div>
       <Navbar color="dark" dark expand="md" light>
-        <NavbarBrand href="/home">reactstrap</NavbarBrand>
+        <NavbarBrand href="/">TOKOBUKU</NavbarBrand>
         <NavbarToggler onClick={function noRefCheck() {}} />
         <Collapse navbar>
           <Nav className="me-auto" navbar>
-            <Link to="/home" className="nav-link" aria-current="page">
+            <Link to="/" className="nav-link" aria-current="page">
               HOME
             </Link>
-            <Link to="/about" className="nav-link" aria-current="page">
+            {/* <Link to="/about" className="nav-link" aria-current="page">
               ABOUT
-            </Link>
+            </Link> */}
             <Link to="/buku/list" className="nav-link" aria-current="page">
               DATA BUKU
             </Link>
-            <Link to="/kelas" className="nav-link" aria-current="page">
+            {/* <Link to="/kelas" className="nav-link" aria-current="page">
               KELAS
             </Link>
             <Link to="/hooks" className="nav-link" aria-current="page">
@@ -44,7 +49,7 @@ export default function NavBar() {
             </Link>
             <Link to="/reducer" className="nav-link" aria-current="page">
               REDUCER
-            </Link>
+            </Link> */}
             {/* <UncontrolledDropdown inNavbar nav>
                 <DropdownToggle caret nav>
                   Options

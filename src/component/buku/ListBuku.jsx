@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Table, Button, Container } from "reactstrap";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import qs from "querystring";
 import { swal_alert, swal_confirm } from "../../js/sweetshow";
+import { AuthContext } from "../../App";
 
 export default function ListBuku() {
-  // const [jumlah, setJumlah] = useState(0);
-  // const [profil, setProfil] = useState({ nama: "", marga: "" });
+  const { dispatch } = useContext(AuthContext);
   const [buku, setBuku] = useState([]);
 
   useEffect(() => {
     console.log("Memanggil Use Effect");
-    // setProfil({ nama: "Minato", marga: "Namikaze" });
+    console.log(window.token);
     axios
       .get(`${window.api}/buku?rest-key=${window.apikey}`, {
         headers: {
@@ -54,6 +54,7 @@ export default function ListBuku() {
   return (
     <Container>
       <h2>Data Buku</h2>
+      {dispatch.state}
       <hr />
       <Link to="/buku/tambah">
         <Button className="mb-3" color="primary">
