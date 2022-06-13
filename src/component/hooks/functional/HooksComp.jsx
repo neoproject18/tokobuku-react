@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Container } from "reactstrap";
+import { Table, Container } from "reactstrap";
 import axios from "axios";
 
 export default function HooksComp() {
