@@ -7,13 +7,21 @@ import { swal_alert, swal_confirm } from "../../js/sweetshow";
 import { AuthContext } from "../../App";
 
 export default function ListBuku() {
-  const { dispatch } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
   const [buku, setBuku] = useState([]);
   window.token = localStorage.getItem("token");
 
-  useEffect(() => {
-    console.log("Memanggil Use Effect");
-    console.log(window.token);
+  const timeout = () => {
+    setTimeout(() => {
+      console.log("Token telah berakhir");
+      dispatch({
+        type: "LOGOUT",
+        payload: null,
+      });
+    }, state.token_expired);
+  };
+
+  const fetchData = () => {
     axios
       .get(`${window.api}/buku?rest-key=${window.apikey}`, {
         headers: {
@@ -24,6 +32,12 @@ export default function ListBuku() {
         // console.log(res.data);
         setBuku(res.data.result);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
+    timeout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const deleteBuku = (idbuku) => {
