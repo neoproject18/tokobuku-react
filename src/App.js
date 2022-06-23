@@ -18,8 +18,8 @@ import {
 import { createContext, useReducer } from "react";
 import jwtDecode from "jwt-decode";
 
-// window.api = "https://dev.neoproject.info/restperpus";
-window.api = "http://localhost/restperpus";
+window.api = "https://dev.neoproject.info/restperpus";
+// window.api = "http://localhost/restperpus";
 window.apikey = "123456789";
 window.token = localStorage.getItem("token");
 
