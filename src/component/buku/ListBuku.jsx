@@ -7,19 +7,9 @@ import { swal_alert, swal_confirm } from "../../js/sweetshow";
 import { AuthContext } from "../../App";
 
 export default function ListBuku() {
-  const { state, dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
   const [buku, setBuku] = useState([]);
   window.token = localStorage.getItem("token");
-
-  const timeout = () => {
-    setTimeout(() => {
-      // console.log("Token telah berakhir");
-      dispatch({
-        type: "LOGOUT",
-        payload: null,
-      });
-    }, state.token_expired);
-  };
 
   const fetchData = () => {
     axios
@@ -36,8 +26,7 @@ export default function ListBuku() {
 
   useEffect(() => {
     fetchData();
-    timeout();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    window.timeout();
   }, []);
 
   const deleteBuku = (idbuku) => {
@@ -125,12 +114,5 @@ export default function ListBuku() {
         </tbody>
       </Table>
     </Container>
-    // <>
-    //   <h1>Profil Pengguna</h1>
-    //   <p>Nama: {profil.nama}</p>
-    //   <p>Marga: {profil.marga}</p>
-    //   <h1>{jumlah}</h1>
-    //   <button onClick={() => setJumlah(jumlah + 1)}>Click</button>
-    // </>
   );
 }

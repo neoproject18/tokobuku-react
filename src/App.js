@@ -15,11 +15,11 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import jwtDecode from "jwt-decode";
 
-window.api = "https://dev.neoproject.info/restperpus";
-// window.api = "http://localhost/restperpus";
+// window.api = "https://dev.neoproject.info/restperpus";
+window.api = "http://localhost/restperpus";
 window.apikey = "123456789";
 window.token = localStorage.getItem("token");
 
@@ -39,12 +39,16 @@ const reducer = (state, action) => {
       console.log("Username: " + action.payload.result.username);
       localStorage.setItem("isAuthenticated", true);
       localStorage.setItem("token", action.payload.token);
-      console.log(jwtDecode(action.payload.token).exp);
+      // console.log(jwtDecode(action.payload.token));
+      let expired =
+        (jwtDecode(action.payload.token).exp -
+          jwtDecode(action.payload.token).iat) *
+        500;
       return {
         ...state,
         isAuthenticated: true,
         token: action.payload.token,
-        token_expired: jwtDecode(action.payload.token).exp,
+        token_expired: expired,
       };
     case "LOGOUT":
       localStorage.clear();

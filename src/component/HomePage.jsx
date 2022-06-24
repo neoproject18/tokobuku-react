@@ -1,7 +1,10 @@
 import jwtDecode from "jwt-decode";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../App";
+import { swal_ok } from "../js/sweetshow";
 
 export default function HomePage() {
+  const { state, dispatch } = useContext(AuthContext);
   const initialState = {
     nama: "",
     username: "",
@@ -9,6 +12,19 @@ export default function HomePage() {
     nama_role: "",
   };
   const [user, setUser] = useState(initialState);
+
+  window.timeout = () => {
+    // console.log(state.token_expired);
+    setTimeout(() => {
+      console.log("Sesi telah berakhir");
+      swal_ok(403, "Sesi telah berakhir", () => {
+        dispatch({
+          type: "LOGOUT",
+          payload: null,
+        });
+      });
+    }, state.token_expired);
+  };
 
   useEffect(() => {
     try {
@@ -21,10 +37,12 @@ export default function HomePage() {
         id_role: jwt_decode.id_role,
         nama_role: jwt_decode.nama_role,
       });
+      window.timeout();
       // console.log(user);
     } catch (e) {
       console.log(e);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="container py-4">
