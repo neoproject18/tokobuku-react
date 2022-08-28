@@ -1,5 +1,6 @@
 {
   "name": "tokobuku",
+  "homepage":"https://fti.uajy.ac.id/industri/testreact",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
